@@ -1,14 +1,25 @@
-<script>
-    const correctPass = "111514";
-    let userInput = prompt("请输入访问密码");
-    if(userInput !== correctPass){
-        alert("密码错误，无权访问");
-        window.location.href = "about:blank";
-    }
-</script>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <script>
+    const correctPass = "111514";
+    let isVerified = sessionStorage.getItem("mochi_verified");
+    if (isVerified !== "true") {
+        while (true) {
+            let userInput = prompt("请输入访问密码：");
+            if (userInput === null) {
+                alert("密码错误，无权访问！");
+                window.location.href = "about:blank";
+                break;
+            } else if (userInput === correctPass) {
+                sessionStorage.setItem("mochi_verified", "true");
+                break;
+            } else {
+                alert("密码错误，请重新输入！");
+            }
+        }
+    }
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-visual">
 <title>Mochi 字卡传讯（完全免费·禁止倒卖）</title>
